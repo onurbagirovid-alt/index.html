@@ -454,7 +454,7 @@ button:hover {
 /* ===== VIDEO & EPISODES BUTTONS ===== */
 #fraqman button,
 #episodes button {
-    margin: 700px auto 0; /* mərkəzləşdirmə */
+    margin: 400px auto 0; /* mərkəzləşdirmə */
     display: block;
     padding: 25px 70px;
     font-size: 24px;

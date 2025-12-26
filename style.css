@@ -1,0 +1,619 @@
+/* ===== GLOBAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+#stockCount {
+    display: none;
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+    background: url(Fotos/72DC1B6B-544F-42F8-ABB7-C18F034B8392.jpeg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Masaüstü üçün */
+    min-height: 100vh;
+    color: white;
+}
+
+/* Mobil üçün */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll; /* Mobilda fixed problem yarada bilər */
+        background-size: cover;        /* Ekranı doldurur, kəsilmə qaçınılmaz ola bilər */
+        background-position: center top;
+        min-height: 100vh;
+    }
+}
+
+/* ===== XƏTT (HR) ===== */
+.responsive-hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, purple);
+    margin: 15px auto;
+    width: 80%;
+    max-width: 600px; /* böyük ekran üçün limit */
+  }
+  
+  /* ===== TITLE ===== */
+  .responsive-title {
+    text-align: center;
+    font-size: 2em;
+    margin: 10px auto;
+    padding: 0 10px; /* kiçik ekranlarda iç boşluq */
+  }
+  
+  /* ===== MOBİL ===== */
+  @media (max-width: 768px) {
+    .responsive-title {
+      font-size: 1.5em;
+    }
+    .responsive-hr {
+      width: 90%;
+      height: 1.5px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .responsive-title {
+      font-size: 1.2em;
+    }
+    .responsive-hr {
+      width: 95%;
+      height: 1px;
+    }
+  }
+  
+
+/* ===== NAVBAR ===== */
+.navbar {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.85);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 200, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Logo */
+.logo {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff0000, #00c8ff, #ff0000); /* qırmızı -> mavi -> qırmızı */
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 15px rgba(0, 200, 255, 0.6),
+                 0 0 30px rgba(255, 0, 0, 0.4); /* qırmızı shadow da əlavə */
+    animation: logoShine 4s linear infinite;
+    cursor: default;
+}
+
+/* Son hərfi xüsusi neon mavi-qırmızı etmək */
+.logo .highlight {
+    background: linear-gradient(90deg, #ff0000, #00c8ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 
+        0 0 10px #00c8ff,
+        0 0 20px #ff0000,
+}
+
+/* Logo gradient animasiyası */
+@keyframes logoShine {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+}
+
+/* Navbar links */
+.navbar nav {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.navbar nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s;
+}
+
+.navbar nav a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #00c8ff;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#fraqmanid {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 30px auto 40px;
+
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    /* Metallic + neon gradient */
+    background: linear-gradient(
+        120deg,
+        #ffffff,
+        #9be7ff,
+        #00c8ff,
+        #ffffff
+    );
+    background-size: 300% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    text-shadow:
+        0 0 8px rgba(0, 200, 255, 0.4),
+        0 0 20px rgba(0, 120, 255, 0.35);
+
+    /* 🔥 Animations */
+    animation:
+        titleEnter 1.2s ease-out forwards,
+        titlePulse 3.5s ease-in-out infinite 1.3s,
+        titleGradient 6s linear infinite;
+
+    opacity: 0; /* başlanğıcda gizli */
+}
+
+/* Səhifə açılarkən daxilolma */
+@keyframes titleEnter {
+    0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(25px);
+        letter-spacing: 12px;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        letter-spacing: 4px;
+    }
+}
+
+/* Yüngül nəfəs alan effekt (fərqli anımsama) */
+@keyframes titlePulse {
+    0%, 100% {
+        text-shadow:
+            0 0 8px rgba(0, 200, 255, 0.4),
+            0 0 20px rgba(0, 120, 255, 0.35);
+    }
+    50% {
+        text-shadow:
+            0 0 16px rgba(0, 200, 255, 0.9),
+            0 0 35px rgba(0, 120, 255, 0.6);
+    }
+}
+
+/* Gradient axını */
+@keyframes titleGradient {
+    0% { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+
+/* Çərçivə */
+#fraqmanBorder {
+    width: 560px;
+    max-width: 95%;
+    padding: 15px;
+
+    border: 2px solid red;
+    margin-bottom: 20px;
+}
+
+
+
+.navbar nav a:hover::after {
+    width: 100%;
+}
+
+.navbar nav a:hover {
+    color: #00c8ff;
+    cursor: pointer;
+}
+
+/* Hamburger menu */
+.menu-btn {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.menu-btn:hover {
+    color: #00c8ff;
+}
+
+/* ===== PAGES ===== */
+.page {
+    display: none;
+    padding: 80px 30px;
+    text-align: center;
+    min-height: calc(100vh - 60px);
+}
+
+.page.active {
+    display: block;
+}
+
+/* ===== HERO ===== */
+.hero {
+    height: 80vh;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 52px;
+    margin-bottom: 30px;
+}
+
+.hero-text span {
+    font-size: 30px;
+}
+
+.hero hr {
+    width: 100%;
+    border: 1px solid #fff;
+    margin: 10px auto;
+}
+
+/* ===== FORM ===== */
+/* FORM */
+/* FORM səhifənin mərkəzində */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    width: 90%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.4),
+                0 0 50px rgba(0, 120, 255, 0.2) inset;
+    backdrop-filter: blur(10px);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* tam mərkəz */
+}
+
+/* INPUT */
+input {
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #00c8ff;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #ff0055;
+    box-shadow: 0 0 10px #00c8ff, 0 0 20px #ff0055;
+    outline: none;
+}
+
+/* BUTTON */
+button {
+    padding: 15px 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 12px;
+    border: 2px solid #00c8ff;
+    background: linear-gradient(90deg, #005066, #00c8ff, #005066);
+    background-size: 200% auto;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00c8ff, 0 0 20px #00c8ff inset;
+    animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+button:hover {
+    transform: scale(1.05) translateY(-3px);
+    background-position: 100% center;
+    box-shadow: 0 0 20px #ff0055, 0 0 40px #00c8ff, inset 0 0 15px #00c8ff;
+}
+
+/* MOBİL */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+    input, button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+/* Neon pulse animasiya */
+@keyframes neonPulse {
+    0% {
+        box-shadow: 0 0 10px #00c8ff, 0 0 20px #00c8ff inset;
+    }
+    50% {
+        box-shadow: 0 0 20px #ff0055, 0 0 40px #00c8ff inset;
+    }
+    100% {
+        box-shadow: 0 0 15px #00c8ff, 0 0 25px #00c8ff inset;
+    }
+}
+
+/* MOBİL */
+@media (max-width: 768px) {
+    form {
+        max-width: 90%;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    input, button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+
+/* ===== DATE-TIME FLOATING ===== */
+.date-time {
+    position: fixed;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #eafaff;
+    padding: 16px 32px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(0, 90, 120, 0.55), rgba(0, 0, 0, 0.75));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.55),
+                0 0 60px rgba(0, 120, 255, 0.45),
+                inset 0 0 15px rgba(255,255,255,0.08);
+    animation: cyberFloat 4s ease-in-out infinite,
+               neonGlow 2.5s ease-in-out infinite;
+    z-index: 9999;
+    cursor: default;
+}
+
+/* Animations */
+@keyframes cyberFloat {
+    0%   { transform: translate(-50%, 0); }
+    50%  { transform: translate(-50%, -6px); }
+    100% { transform: translate(-50%, 0); }
+}
+
+@keyframes neonGlow {
+    0% {
+        box-shadow: 0 0 20px rgba(0, 200, 255, 0.4),
+                    0 0 45px rgba(0, 120, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(0, 200, 255, 0.9),
+                    0 0 80px rgba(0, 120, 255, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(0, 200, 255, 0.4),
+                    0 0 45px rgba(0, 120, 255, 0.4);
+    }
+}
+
+/* ===== VIDEO & EPISODES BUTTONS ===== */
+/* ===== VIDEO & EPISODES BUTTONS ===== */
+#fraqman button,
+#episodes button {
+    margin: 700px auto 0; /* mərkəzləşdirmə */
+    display: block;
+    padding: 25px 70px;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #005066;
+    color: #00c8ff;
+    border: 2px solid #00c8ff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00c8ff, 0 0 20px #00c8ff, inset 0 0 5px #00c8ff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effekt */
+#fraqman button:hover,
+#episodes button:hover {
+    background-color: #00c8ff;
+    color: #001f3f;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 20px #00c8ff, 0 0 40px #00c8ff, inset 0 0 10px #00c8ff;
+}
+
+/* Neon parlayan animasiya */
+@keyframes neonGlow {
+    0%, 100% { box-shadow: 0 0 10px #00c8ff, 0 0 20px #00c8ff, inset 0 0 5px #00c8ff; }
+    50% { box-shadow: 0 0 25px #00c8ff, 0 0 50px #00c8ff, inset 0 0 15px #00c8ff; }
+}
+
+#fraqman button,
+#episodes button {
+    animation: neonGlow 2s ease-in-out infinite alternate;
+}
+
+/* Mobil üçün */
+@media (max-width: 768px) {
+    #fraqman button,
+    #episodes button {
+        padding: 15px 40px;
+        font-size: 18px;
+    }
+}
+
+
+/* ===== Fraqman və Episodes Düymələrinin Bloka Yerləşməsi ===== */
+#fraqmanBorder,
+#episodes .episodes-carousel {
+    display: flex;
+    flex-direction: column; /* üst-üstə yerləşsin */
+    align-items: center;    /* mərkəzləşdir */
+    gap: 20px;              /* title ilə düymə arasında boşluq */
+}
+
+
+.mobile-only {
+    display: none !important;
+}
+
+#snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* klikləri əngəlləmir */
+    z-index: 9999;
+  }
+  
+  .snowflake {
+    position: absolute;
+    top: -10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  
+  @keyframes fall {
+    to { transform: translateY(100vh); }
+  }
+  
+
+/* ===== MOBILE MENU ===== */
+@media (max-width: 768px) {
+    .menu-btn {
+        display: block;
+    }
+
+    .navbar nav {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0,0,0,0.9);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+        border-top: 1px solid #00c8ff;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .navbar nav.show {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    .navbar nav a {
+        padding: 12px 0;
+        text-align: center;
+    }
+
+    /* Hero & buttons */
+    .hero h1 { font-size: 36px; }
+    .hero-text span { font-size: 20px; }
+
+    #fraqman button,
+    #episodes button {
+        padding: 15px 40px;
+        font-size: 16px;
+    }
+
+    form {
+        max-width: 90%;
+        margin: 20px auto;
+    }
+
+    input, button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .date-time {
+        font-size: 18px;
+        padding: 10px 20px;
+        gap: 10px;
+    }
+}
+
+/* Mobile menu animation */
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo shine animation */
+@keyframes logoShine {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+}
+
+@media (max-width: 768px) {
+    #fraqmanid {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+}

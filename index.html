@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arka Sokaklar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <div class="logo">
+        Arka Sokaka<span class="highlight">r</span>
+      </div>      
+
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+  <nav id="menu">
+    <a onclick="openPage('home')" data-key="home"></a>
+    <a onclick="openPage('episodes')" data-key="episodes"></a>
+    <a onclick="openPage('ticket')" data-key="ticket"></a>
+    <a onclick="openPage('fraqman')" data-key="fraqman" ></a>
+    <select onchange="changeLang(this.value)">
+      <option value="az">AZ</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+</header>
+
+<div class="mobile-only">
+    <p>Bu hissə yalnız telefonlarda görünəcək</p>
+    <button onclick="alert('Mobil düymə!')">Kliklə</button>
+</div>  
+
+<div class="date-time" id="dateTime"></div>
+
+<!-- ===== HOME ===== -->
+<section id="home" class="page active">
+  <div class="hero">
+    <h1 data-key="heroTitle"></h1>
+    <p class="hero-text" data-key="heroText"></p>
+  </div>
+</section>
+
+<!-- ===== EPISODES ===== -->
+<section id="episodes" class="page">
+    <hr>
+    <h1 id="fraqmanid"  data-key="episodesTitle"></h1> 
+    <hr>
+    <div class="episodes-carousel"></div>
+    <button data-key="newepisodes" onclick="window.open('https://youtu.be/W7SI_j7udT0', '_blank')" ></button>
+  </section>
+
+<!-- ===== Fragman ===== -->
+<section id="fraqman" class="page">
+    <hr>
+    <h2 id="fraqmanid" data-key="fragmanTitle" ></h2>
+    <hr>
+    <button data-key="newFragman" onclick="window.open('https://youtu.be/CjfDb1yVHB0?si=RrYvL7xslko5JaIL','_blank')" ></button>
+  </section>
+
+<!-- ===== TICKET ===== -->
+<section id="ticket" class="page">
+    <hr>
+    <h2 id="fraqmanid" data-key="ticket"></h2>
+    <hr>
+    <p style="display: none;"><span data-key="stock"></span> : <b id="stockCount">0</b></p>
+
+  <form onsubmit="buyTicket(event)">
+    <input type="text" data-key-placeholder="name" required>
+    <input type="number" min="1" max="7" value="1" id="count">
+    <button type="submit" data-key="buy"></button>
+  </form>
+</section>
+
+<div id="snow"></div>
+
+<script src="JavaScript.js"></script>
+</body>
+</html>
